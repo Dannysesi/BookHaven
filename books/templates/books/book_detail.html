@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ book.title }} - Book Details</title>
+    <style>
+        /* style.css */
+    body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f8f8f8;
+    }
+
+    h1, h2 {
+        color: #333;
+    }
+
+    p {
+        margin-bottom: 10px;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    ul li {
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        background-color: #fff;
+    }
+
+    form {
+        margin-top: 20px;
+    }
+
+    label, input, textarea {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    input, textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+    }
+
+    input[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+
+    a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    </style>
+</head>
+<body>
+    <div style="background-color: #55555561; padding: 30px; border-radius: 20px;">
+        <h3><a href="javascript:history.back()" style="color: #333;">Back</a></h3>
+        <div class="center-image-container" style="text-align: center;">
+            <img src="{{ book.image.url }}" alt="{{ book.title }} Image" width="500" height="500" class="center-image" style="border-radius: 10px;">
+        </div>
+        <div style="background-color: #fff; color: #0d3d0e; border: none; padding: 10px 20px; border-radius: 5px; text-decoration: none; margin-top: 30px;">
+            <h1>{{ book.title|capfirst }}</h1>
+            <p>Author: {{ book.author|capfirst }}</p>
+            <p>Genres: {{ book.genre|lower|capfirst }}</p>
+            <p>Contributor: {{ book.contributors|capfirst }}</p>
+            <p>Publication Date: {{ book.pub_date }}</p>
+            <p>ISBN: {{ book.isbn }}</p>
+        </div>     
+        <h2>Reviews:</h2>
+        <ul>
+            {% for review in reviews|slice:":3" %}
+                <li>
+                    Rating: {{ review.ratings|capfirst }}<br>
+                    Comment: {{ review.comment|capfirst }}<br>
+                    Posted by: {{ review.creator.username|capfirst }}<br>
+                    Date Posted: {{ review.date_created|capfirst }}
+                </li>
+            {% endfor %}
+        </ul>
+        {% if user.is_authenticated %}
+            <h2>Submit a Review</h2>
+            <form method="post" action="{% url 'submit_review' book.id %}">
+                {% csrf_token %}
+                <label for="ratings">Rating:</label>
+                <input type="number" name="ratings" min="1" max="5" required><br>
+                <label for="comment">Comment:</label><br>
+                <textarea name="comment" required></textarea><br>
+                <input type="submit" value="Submit">
+            </form>
+        {% else %}
+            <p><a href="{% url 'login' %}?next=/book_detail/{{ book.id }} ">Log in</a> to submit a review.</p>
+        {% endif %}
+        <div style="margin-top: 20px;">
+            {% if book.author == user %}
+                <a href="{% url 'book-update' pk=book.pk %}" style="background-color: #fff; color: #0d3d0e; border: none; padding: 10px 20px; border-radius: 5px; text-decoration: none;margin-top: 20px;">Update</a>
+                <a href="{% url 'book-delete' pk=book.pk %}" style="background-color: #fff; color: #0d3d0e; border: none; padding: 10px 20px; border-radius: 5px; text-decoration: none; margin-top: 20px;">Delete</a>
+            {% endif %}
+        </div>
+    </div>
+    <!-- <button >Go Back</button> -->
+    <script>
+    function goBack() {
+    window.history.back();
+    }
+    </script>
+
+</body>
+</html>

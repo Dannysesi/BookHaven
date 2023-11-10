@@ -1,0 +1,222 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="dropdown" style="margin-left: 20px; margin-bottom: 10px;">
+  <button class="custom-btn" id="genreDropdown">Genre</button>
+  <div class="custom-dropdown-menu" id="genreMenu">
+    {% for genre_code, genre_name in genres %}
+        <a class="custom-dropdown-item" href="{% url 'books_by_genre' genre_code %}">{{ genre_name|capfirst }}</a>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+  document.getElementById("genreDropdown").addEventListener("click", function() {
+    document.getElementById("genreMenu").classList.toggle("show");
+  });
+
+  window.onclick = function(event) {
+    if (!event.target.matches('.custom-btn')) {
+      var dropdowns = document.getElementsByClassName("custom-dropdown-menu");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+        }
+      }
+    }
+  }
+</script>
+
+<ul class="custom-list-group">
+    {% for item in page %}
+      <li class="custom-list-group-item">
+          <div class="center-image-container">
+              <img src="{{ item.image.url }}" width="200" height="200" class="center-image">
+              <a href="{% url 'book_detail' item.id %}" class="book-title">{{ item.title|capfirst }}</a>
+          </div>
+      </li>
+    {% endfor %}
+</ul>
+
+<div style="padding: 20px;">
+    <a href="{% url 'book-create' %}" class="btn btn-primary" style="text-decoration: none;">Add new book</a>
+</div>
+<div class="pagination">
+    <span class="step-links">
+        {% if page.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page.previous_page_number }}">previous</a>
+        {% endif %}
+
+
+        {% for num in page.paginator.page_range%}
+            {% if page.number == num %}
+                <a href="?page={{ num }}">{{ num }}</a>
+            {% elif num > page.number|add:'-3' and num < page.number|add:'3' %}
+                <a href="?page={{ num }}">{{ num }}</a>
+            {% endif %}
+        {% endfor %}
+
+        <!-- <span class="current">
+            Page {{ page.number }} of {{ page.paginator.num_pages }}.
+        </span> -->
+
+        {% if page.has_next %}
+            <a href="?page={{ page.next_page_number }}">next</a>
+            <a href="?page={{ page.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+  
+
+<style>
+    .custom-btn {
+        background-color: #333;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .custom-btn:hover {
+        background-color: #555;
+    }
+
+    .custom-dropdown-menu {
+        display: none;
+    }
+
+    .custom-dropdown-menu.show {
+        display: block;
+    }
+
+    .custom-dropdown-item {
+        display: block;
+        width: 6%;
+        padding: .25rem 1.5rem;
+        clear: both;
+        font-weight: 400;
+        color: #212529;
+        text-align: inherit;
+        white-space: nowrap;
+        background-color: transparent;
+        border: 0;
+        text-decoration: none;
+    }
+
+    .custom-dropdown-item:hover {
+        background-color:#55555588;
+        border-radius: 20px;
+    }
+
+    .custom-list-group {
+        list-style-type: none;
+        margin: auto;
+        padding: 10px 20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        /* margin-bottom: 100px; */
+    }
+
+    .custom-list-group-item {
+        background-color: rgba(169, 169, 169, 0.458);
+        padding: 10px;
+        width: 300px;/*calc(33.33% - 20px); Adjust the width and margin as needed */
+        text-align: center;
+        margin-bottom: 20px; /* Adjust the margin as needed */
+        box-sizing: border-box;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+    }
+
+    @media(max-width: 700px) {
+        .custom-list-group-item {
+            width: calc(100% - 20px); /* Full width for mobile */
+        }
+    }
+
+
+    .custom-list-group-item:hover {
+        background-color: #ccc;
+        box-shadow: 10px 10px #55555563;
+    }
+
+    .custom-list-group-item a {
+        text-decoration: none;
+        color: #212529;
+        text-align: center;
+    }
+
+    .custom-list-group-item a:hover {
+            text-decoration: underline;
+        }
+
+    .center-image-container {
+        text-align: center;
+        max-width: 200px; /* Set a maximum width for the container */
+        margin: auto;
+        /* border: 1px solid #ccc; Add a border */
+        padding: 10px; /* Add some padding */
+    }
+
+    .center-image {
+        display: block;
+        margin: 0 auto;
+        max-width: 100%;
+    }
+
+    .book-title {
+        display: block;
+        text-align: center;
+        margin-top: 10px;
+        text-decoration: none; /* Remove default underline */
+        color: #333; /* Set link color */
+    }
+
+    /* Pagination Container */
+    .pagination {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    /* Pagination Links */
+    .step-links a {
+        display: inline-block;
+        padding: 8px 16px;
+        text-decoration: none;
+        color: #000;
+        background-color: #f1f1f1;
+        border-radius: 5px;
+        margin: 2px;
+    }
+
+    /* Current Page Indicator */
+    .current {
+        display: inline-block;
+        padding: 8px 16px;
+        background-color: #4CAF50;
+        color: #ffffff;
+        border-radius: 5px;
+        margin: 2px;
+    }
+
+    /* Hover Effect on Links */
+    .step-links a:hover {
+        background-color: #ddd;
+    }
+
+    /* Disable Links for First and Last Page */
+    .step-links .disabled {
+        pointer-events: none;
+        background-color: #ddd;
+        color: #999;
+    }
+
+</style>
+
+{% endblock %}

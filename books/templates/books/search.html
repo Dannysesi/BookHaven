@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="content-section" style="max-width: 500px; margin: auto; padding: 1cm; border-radius: 10px; background-color:  #333; color: #fff;">
+    <form method="get">
+        {% csrf_token %}
+        <fieldset class="form-group" style="padding: 50px;">
+            <legend style="font-size: 1.5em; font-weight: bold; color: #fff;">Search</legend>
+            <label for="search" style="color: #fff;">Enter Book Title to Search:</label>
+            {{ form }}
+        </fieldset>
+    </form>
+    {% if results %}
+        <h2>Search Results</h2>
+        <ul style="margin-bottom: 40px; text-decoration: none;">
+            {% for book in results %}
+                <li style="margin-bottom: 40px; text-decoration: none;">
+                    <a href="{% url 'book_detail' book.id %}" style="background-color: #fff; color: #0d3d0e; border: none; padding: 10px 20px; border-radius: 5px; text-decoration: none;">{{ book.title|capfirst }} by {{ book.author }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+    <a href="#" onclick="history.go(-1); return false;" style="background-color: #fff; color: #0d3d0e; border: none; padding: 10px 20px; border-radius: 5px; text-decoration: none;">Back</a>
+</div>
+{% endblock %}
