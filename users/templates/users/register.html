@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="content-section" style="max-width: 500px; margin: auto; padding: 1cm; margin-top: 10px; background-color:  #333; color: #fff; border-radius: 20px;">
+    <form method="post" style="margin: 20px;">
+        {% csrf_token %}
+        <fieldset class="form-group" style="padding: 50px;">
+            <legend class="text-center" style="font-size: 1.5em; font-weight: bold; color: #fff;">Join Today</legend>
+            <div class="form-group row">
+                <label for="username" style="color: #fff;">Username:</label>
+                <div class="col-sm-10" style="width: 21em;">
+                    {{ form.username }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="email" style="color: #fff;">Email:</label>
+                <div class="col-sm-10" style="width: 21em;" >
+                    {{ form.email }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="password1" style="color: #fff;"">Password:</label>
+                <div class="col-sm-10" style="width: 21em;">
+                    {{ form.password1 }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="password2" style="color: #fff;">Confirm Password:</label>
+                <div class="col-sm-10" style="width: 21em;">
+                    {{ form.password2 }}
+                </div>
+            </div>
+        </fieldset>
+        <div class="form-group" style="margin-top: 20px; margin-bottom: -20px;">
+            <button type="submit" style="background-color: #fff; color: #0d3d0e; border: none; padding: 10px 20px; border-radius: 5px;">Register</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background-color: #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding:20px;
+            font-size: larger;
+            font-family: cursive;
+            /* margin: 10px; */
+            /* border-radius: 10px; */
+            margin-bottom: 50px;
+        }
+
+        .navbar-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-item {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+        }
+
+        .nav-item:hover {
+            background-color: #555;
+        }
+
+        .search-bar {
+            padding: 8px;
+            border: none;
+            border-radius: 4px;
+            width: 80%;
+            padding-right: 20px;
+        }
+
+        .form-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form {
+            text-align: center;
+            max-width: 300px;
+            width: 100%;
+        }
+
+        .form h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .btn {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background-color: #555;
+        }
+
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 50px 0;
+            flex-shrink: 0;
+            /* margin-top: auto; */
+            margin-top: 5em;
+            padding: 30px 30px 20px 30px;
+            
+        }
+
+        .footer-section.about {
+            max-width: 500px; /* Set the maximum width */
+            max-height: 200px; /* Set the maximum height */
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+
+        .footer-section {
+            margin-bottom: 30px;
+        }
+
+        .footer-section h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .contact span {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .contact i {
+            margin-right: 5px;
+        }
+
+        .social a {
+            display: inline-block;
+            font-size: 20px;
+            margin-right: 10px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .quick-links ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .quick-links li {
+            margin-bottom: 10px;
+        }
+
+        .quick-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 80%;
+            padding: 10px;
+            margin-right: 20px;
+            margin-bottom: 10px;
+            border: 1px solid #777;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .contact-form button {
+            background-color: #777;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .alert {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        main {
+            background-position: center;
+            background-size: cover;
+            margin: 30px;
+            /* margin-bottom: 20%; */
+            height: 100%;
+        }
+
+        .menu-button {
+            display: none;
+            cursor: pointer;
+        }
+
+        @media(max-width: 700px) {
+            main {
+                margin-bottom: 20%;/*calc(100% - -5%); Full width for mobile */
+            }
+        }
+
+        @media (max-width: 700px) {
+            .navbar-left {
+                position: fixed;
+                width: 100%;
+                height: 100vh;
+                background: #2c3e50;
+                top: 80px;
+                left: -100%;
+                text-align: center;
+                transition: all .5s;
+            }
+            
+
+            .navbar.active .navbar-left {
+                display: block;
+            }
+
+            .menu-button {
+                display: block;
+            }
+
+            .menu-button i {
+                cursor: pointer;
+            }
+
+            .navbar.active .menu-button i:before {
+                content: "\f00d"; 
+            }
+
+            .navbar .menu-button.active i:before {
+                content: "\f00d";
+            }
+        }
+
+        /* @media (max-width: 700px) {
+            .menu-button {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .navbar-items {
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+
+            .navbar.active .navbar-items {
+                display: flex;
+            }
+
+            .menu-button i {
+                cursor: pointer;
+            }
+        } */
+
+
+        
+
+
+    </style>
+    <title>BookHaven</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="menu-button" id="menu-button">
+                <i class="fas fa-bars"></i>
+            </div>
+            <div class="navbar-left">
+                <a href="{% url 'home-page' %}" class="nav-item">Home</a>
+                <a href="{% url 'book_list' %}" class="nav-item">Books</a>
+                <a href="#" class="nav-item">Purchase</a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'profile' %}" class="nav-item">Profile</a>
+                <a href="{% url 'logout' %}" class="nav-item">logout</a>
+                {% else %}
+                <a href="{% url 'login' %}" class="nav-item">Login</a>
+                <a href="{% url 'register' %}" class="nav-item">Register</a>
+                {% endif %}
+                <a href="{% url 'search' %}" class="nav-item">search</a>
+            </div>
+        </nav>
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+    </header>
+    <main>
+        {% block content %}
+            <h1 style="font-family: cursive;">Welcome to BookHaven</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias delectus voluptatum ex, omnis velit quasi sequi atque vitae neque aliquid reprehenderit. Mollitia facere ipsam a ex ipsum reprehenderit minima, harum perspiciatis voluptatum aliquam, libero adipisci veniam aperiam rem quisquam odio? Laudantium veritatis tempora natus, nam, est eveniet impedit sed magnam provident quasi libero animi earum officia quos numquam? Natus autem repellendus est minima quaerat, ratione velit nobis fugit veritatis eveniet possimus fugiat, suscipit ex nisi impedit, culpa molestias obcaecati nam ipsa iusto optio odio. Non doloribus et nesciunt veritatis velit distinctio adipisci quaerat reiciendis ea, eum excepturi incidunt exercitationem recusandae.</p>
+            <div style="text-align: center;">
+                <img src="media/book.jpeg" width="700" height="500">
+            </div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur cupiditate cumque vero facere nostrum in et consectetur quos magni tempore dolor enim fugit, porro possimus sapiente saepe vel ipsam eum officia aliquid ea. Inventore sunt repellat natus voluptatum eum nobis exercitationem voluptatem vero, perspiciatis aliquam veritatis nesciunt explicabo ipsa excepturi?</p>
+            {% if is_paginated %}
+                {% if page_obj.has_previous%}
+                    <a href="?page=1">First</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range%}
+                    {% if page_obj.number == num %}
+                        <a href="?page={{ num }}">{{ num }}</a>
+                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                    <a href="?page={{ num }}">{{ num }}</a>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next%}
+                    <a href="?page={{ page_obj.next_page_number }}">Next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+                {% endif %}
+
+            {% endif %}
+        {% endblock %}
+    </main>
+    <footer class="footer" style="margin-top: 100px;">
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h2>About Us</h2>
+                <p>BookHaven is a comprehensive platform for authors to showcase and sell their literary works, and for readers to discover, purchase, and engage with a diverse range of books.</p>
+                <div class="contact">
+                    <span><i class="fas fa-phone"></i> (123) 456-7890</span>
+                    <span><i class="fas fa-envelope"></i> info@example.com</span>
+                </div>
+                <div class="social">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section quick-links">
+                <h2>Quick Links</h2>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Books</a></li>
+                    <li><a href="#">Login</a></li>
+                    <li><a href="#">Register</a></li>
+                </ul>
+            </div>
+            <div class="footer-section contact-form">
+                <h2>Contact Us</h2>
+                <form>
+                    <input type="email" name="email" class="text-input" placeholder="Your email address">
+                    <textarea name="message" class="text-input" placeholder="Your message"></textarea>
+                    <button type="submit" class="btn">Send</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2023 Book Haven. All rights reserved.
+        </div>
+    </footer>
+    
+    
+    <script>
+        const toggleButton = document.getElementById('toggle-button');
+        const navItems = document.getElementById('nav-items');
+
+        toggleButton.addEventListener('click', () => {
+            navItems.classList.toggle('active');
+        });
+
+        const searchInput = document.getElementById('search-input');
+        const searchButton = document.getElementById('search-button');
+
+        searchButton.addEventListener('click', () => {
+            const searchTerm = searchInput.value;
+        });
+
+        function showLoginForm() {
+        const loginFormContainer = document.getElementById('login-form-container');
+        const registerFormContainer = document.getElementById('register-form-container');
+
+            loginFormContainer.style.display = 'flex';
+            registerFormContainer.style.display = 'none';
+        }
+
+        function showRegisterForm() {
+            const loginFormContainer = document.getElementById('login-form-container');
+            const registerFormContainer = document.getElementById('register-form-container');
+
+            loginFormContainer.style.display = 'none';
+            registerFormContainer.style.display = 'flex';
+        }
+
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('active');
+            } else {
+                navbar.classList.remove('active');
+            }
+        });
+
+        document.getElementById('menu-button').addEventListener('click', function() {
+            document.getElementById('navbar').classList.toggle('active');
+        });
+
+    </script>
+    <script>
+        document.getElementById('menu-button').addEventListener('click', function() {
+            document.querySelector('.navbar').classList.toggle('active');
+        });
+
+    </script>
+        
+</body>
+</html>
