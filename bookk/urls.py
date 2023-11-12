@@ -22,12 +22,12 @@ from books import views as book_view
 from django.conf import settings
 from django.conf.urls.static import static
 from books.views import BookCreateView, BookUpdateView, BookDeleteView
-from books.admin import admin_site
+# from books.admin import admin_site
 from users.views import BookListView
 
 urlpatterns = [
     # Users app
-    path('admin/', admin_site.urls, name='admin'),
+    path('admin/', admin.site.urls, name='admin'),
     path('register/', user_view.register, name='register'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
@@ -40,6 +40,7 @@ urlpatterns = [
     path('books/genre/<str:genre_type>', book_view.books_by_genre, name='books_by_genre'),
     path('books/<int:id>/submit_review/', book_view.submit_review, name='submit_review'),
     path('search/', book_view.book_search, name='search'),
+    path('add_chapter/<int:id>/', book_view.add_chapter, name='add_chapter'),
 
 
     path('book/new/', BookCreateView.as_view(), name='book-create'),
@@ -56,8 +57,9 @@ urlpatterns = [
     path('password-reset-comfirm/<uidb64>/<token>/',
         auth_views.PasswordResetConfirmView.as_view(template_name='users/password_reset_confirm.html'),
         name='password_reset_confirm'),
-
-
+    path('password-reset-complete/',
+        auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'),
+        name='password_reset_complete')
 ]
 
 if settings.DEBUG:
