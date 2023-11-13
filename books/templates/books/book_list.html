@@ -32,7 +32,9 @@
     {% for item in page %}
       <li class="custom-list-group-item">
           <div class="center-image-container">
-              <img src="{{ item.image.url }}" width="200" height="200" class="center-image">
+                <a href="{% url 'book_detail' item.id %}">
+                <img src="{{ item.image.url }}" width="200" height="200" class="center-image">
+                </a>
               <a href="{% url 'book_detail' item.id %}" class="book-title">{{ item.title|capfirst }}</a>
           </div>
       </li>
@@ -125,9 +127,9 @@
     .custom-list-group-item {
         background-color: rgba(169, 169, 169, 0.458);
         padding: 10px;
-        width: 300px;/*calc(33.33% - 20px); Adjust the width and margin as needed */
+        width: 300px;/*calc(33.33% - 20px); */
         text-align: center;
-        margin-bottom: 20px; /* Adjust the margin as needed */
+        margin-bottom: 20px; 
         box-sizing: border-box;
         border-radius: 4px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -143,7 +145,8 @@
 
     .custom-list-group-item:hover {
         background-color: #ccc;
-        box-shadow: 10px 10px #55555563;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+
     }
 
     .custom-list-group-item a {
