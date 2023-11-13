@@ -22,6 +22,8 @@ class Book(models.Model):
     genre = models.CharField(verbose_name='genre of this book', choices=GenreType, max_length=20)
     contributors = models.CharField(max_length=70)
     image = models.ImageField(default='no_image.JPEG', upload_to='book_images', null=True, blank=True)
+    pdf_file = models.FileField(upload_to='book_pdfs', null=True, blank=True)
+
 
     def __str__(self):
         return self.title
@@ -30,21 +32,16 @@ class Book(models.Model):
         return reverse('book_detail', kwargs={'id': self.id})
 
 
-class Genre(models.Model):
-    GenreType = (
-        ('HORROR', 'horror'),
-        ('COMEDY', 'comedy'),
-        ('ROMANCE', 'romance'),
-        ('ACTION', 'action'),
-        ('SCI-FI', 'sci-fi'),
-        ('SCIENCE', 'science')
-    )
 
-    # book = models.ForeignKey(Book, on_delete=models.CASCADE)
-    genre = models.CharField(verbose_name='genre of this book', choices=GenreType, max_length=20)
+class Chapter(models.Model):
+    book = models.ForeignKey(Book, related_name='chapters', on_delete=models.CASCADE)
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+    pdf_file = models.FileField(upload_to='chapters_pdfs', null=True, blank=True)
 
     def __str__(self):
-        return self.genre
+        return f"{self.book.title} - Chapter {self.title}"
+
 
 class Review(models.Model):
     rating_choices = (
