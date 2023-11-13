@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content%}
-<div class="content-section" style="max-width: 500px; margin: auto; padding: 1cm; border-radius: 10px; background-color:  #333; color: #fff;">
+<div class="content-section" style="max-width: 600px; margin: auto; padding: 1cm; border-radius: 10px; background-color:  #333; color: #fff;">
     <div style="text-align: center;">
         <img src="{{ user.profile.image.url }}" style="border-radius: 10px;">
         <div style="text-align: center;">
@@ -13,19 +13,19 @@
             {% csrf_token %}
             <fieldset class="form-group" style="padding: 50px;">
                 <legend style="font-size: 1.5em; font-weight: bold; color: #fff;">Profile Info</legend>
-                <div class="form-group" style="width: 22.5em;">
-                    <label for="username" style="color: #fff;">Username:</label>
-                    {{ u_form.username }}
-                    <small>Choose a new username</small>
-                </div>
-                <div class="form-group" style="width: 22.5em;">
-                    <label for="email" style="color: #fff;">Email:</label>
-                    {{ u_form.email }}
-                    <small>Update email</small>
-                </div>
-                <div>
-                    {{ p_form }}
-                </div>
+                    <div class="form-group" style="width: 92%;">
+                        <label for="username" style="color: #fff;">Username:</label>
+                        {{ u_form.username }}
+                        <small>Choose a new username</small>
+                    </div>
+                    <div class="form-group" style="width: 92%;">
+                        <label for="email" style="color: #fff;">Email:</label>
+                        {{ u_form.email }}
+                        <small>Update email</small>
+                    </div>
+                    <div style="margin-bottom: 30px; color: #fff; text-decoration: none;">
+                        {{ p_form }}
+                    </div>
             </fieldset>
             <div>
                 <button type="submit">Update</button>
@@ -33,4 +33,31 @@
         </form>
     </div>
 </div>
+<style>
+    @media (max-width: 700px) {
+        .content-section {
+            width: calc(100% - 20px);
+            margin: auto;
+            padding: auto;
+        }
+
+        .form-group fieldset {
+            padding: 1px;
+        }
+    }
+    @media (max-width: 700px) {
+        .form-group {
+            width: calc(100% - 20px);
+            /* padding: auto; */
+        }
+
+        /* .form-group legend {
+            width: calc(100% - 20px); 
+        } */
+
+        .form-group div {
+            width: calc(100% - 20px);
+        }
+    }
+</style>
 {% endblock %}

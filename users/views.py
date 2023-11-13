@@ -5,6 +5,7 @@ from django.contrib.auth.views import LoginView
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from books.models import *
 from django.views.generic import ListView
+from django.contrib.auth.models import Group
 
 
 # Create your views here.
@@ -21,6 +22,7 @@ class BookListView(ListView):
 
 
 def register(request):
+    # user = None
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
