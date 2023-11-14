@@ -11,14 +11,14 @@
     <div>
         <form method="POST" enctype="multipart/form-data" id="updateform">
             {% csrf_token %}
-            <fieldset class="form-group" style="padding: 50px;">
+            <fieldset class="form-group">
                 <legend style="font-size: 1.5em; font-weight: bold; color: #fff;">Profile Info</legend>
-                    <div class="form-group" style="width: 92%;">
+                    <div class="form-group" style="width: 90%;">
                         <label for="username" style="color: #fff;">Username:</label>
                         {{ u_form.username }}
                         <small>Choose a new username</small>
                     </div>
-                    <div class="form-group" style="width: 92%;">
+                    <div class="form-group" style="width: 90%;">
                         <label for="email" style="color: #fff;">Email:</label>
                         {{ u_form.email }}
                         <small>Update email</small>
@@ -34,30 +34,75 @@
     </div>
 </div>
 <style>
-    @media (max-width: 700px) {
-        .content-section {
-            width: calc(100% - 20px);
-            margin: auto;
-            padding: auto;
-        }
+    @media (max-width: 767px) {
+            /* Adjust styles for smaller screens */
+            .content-section {
+                width: 75%;
+                border-radius: 0;
+                margin: 0px;
+                padding: 0px;
+                max-width: fit-content;
+            }
 
-        .form-group fieldset {
-            padding: 1px;
-        }
-    }
-    @media (max-width: 700px) {
-        .form-group {
-            width: calc(100% - 20px);
-            /* padding: auto; */
-        }
+            .form-group {
+                width: 0%;
+            }
 
-        /* .form-group legend {
-            width: calc(100% - 20px); 
-        } */
 
-        .form-group div {
-            width: calc(100% - 20px);
+            form#updateform {
+                max-width: 100%;
+                /* margin: 0%; */
+            }
+
+
+            fieldset.form-group {
+                padding: 10px;
+                margin: 10px;
+                width: 85%;
+            }
+
+            fieldset.form-group div {
+                width: 100%;
+                height: 50%;
+            }
+
+            fieldset.form-group div a {
+                width: 100%;
+                height: 50%;
+            }
+        
+            form div {
+                margin: auto;
+                width: auto;
+            }
+
+            /* div.form-group {
+                height: 10px;
+            } */
+
+            input#id_username {
+                margin: auto;
+                padding: 5px;
+                width: 90%;
+            }
+
+            input#id_email {
+                margin: auto;
+                padding: 5px;
+                width: 90%;
+            }
+
+            input#id_image {
+                margin: auto;
+                padding: 5px;
+                width: 90%;
+            }
+
+
+            div.form-group-button {
+                width: 30%;
+                margin-top: 20px;
+            }
         }
-    }
 </style>
 {% endblock %}
