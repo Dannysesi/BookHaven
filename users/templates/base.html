@@ -6,7 +6,7 @@
     <!-- <link rel="stylesheet" href="styles.css"> -->
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family:cursive;
             margin: 0;
             min-height: 100vh;
         }
@@ -218,7 +218,9 @@
         @media(max-width: 700px) {
             main {
                 margin-bottom: 20%;/*calc(100% - -5%); Full width for mobile */
+                margin: 5px;
             }
+
         }
 
         @media (max-width: 700px) {
@@ -245,6 +247,10 @@
 
             .navbar .menu-button.active i:before {
                 content: "\f00d";
+            }
+
+            .footer {
+                width: fit-content;
             }
         }
 
@@ -296,7 +302,7 @@
             <h1 style="font-family: cursive;">Welcome to BookHaven</h1>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias delectus voluptatum ex, omnis velit quasi sequi atque vitae neque aliquid reprehenderit. Mollitia facere ipsam a ex ipsum reprehenderit minima, harum perspiciatis voluptatum aliquam, libero adipisci veniam aperiam rem quisquam odio? Laudantium veritatis tempora natus, nam, est eveniet impedit sed magnam provident quasi libero animi earum officia quos numquam? Natus autem repellendus est minima quaerat, ratione velit nobis fugit veritatis eveniet possimus fugiat, suscipit ex nisi impedit, culpa molestias obcaecati nam ipsa iusto optio odio. Non doloribus et nesciunt veritatis velit distinctio adipisci quaerat reiciendis ea, eum excepturi incidunt exercitationem recusandae.</p>
             <div style="text-align: center;">
-                <img src="media/book.jpeg" width="700" height="500" style="border-radius: 10px; box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);">
+                <img src="media/book.jpeg" width="50%" height="50%" style="border-radius: 10px; box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);">
             </div>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur cupiditate cumque vero facere nostrum in et consectetur quos magni tempore dolor enim fugit, porro possimus sapiente saepe vel ipsam eum officia aliquid ea. Inventore sunt repellat natus voluptatum eum nobis exercitationem voluptatem vero, perspiciatis aliquam veritatis nesciunt explicabo ipsa excepturi?</p>
             {% if is_paginated %}
