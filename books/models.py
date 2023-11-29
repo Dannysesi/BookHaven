@@ -26,7 +26,7 @@ class Book(models.Model):
 
 
     def __str__(self):
-        return self.title
+        return f'{} ({})'.format(self.title, self.isbn)
 
     def get_absolute_url(self):
         return reverse('book_detail', kwargs={'id': self.id})
