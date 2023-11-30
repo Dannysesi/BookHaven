@@ -89,6 +89,7 @@ class BookCreateView(LoginRequiredMixin, CreateView):
 #     model = Chapter
 #     form_class = ChapterForm
 #     template_name = 'add_chapter'
+#template_engine = 'addchapter.html'
 
 
 class BookUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
