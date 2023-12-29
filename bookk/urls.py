@@ -22,12 +22,12 @@ from books import views as book_view
 from django.conf import settings
 from django.conf.urls.static import static
 from books.views import BookCreateView, BookUpdateView, BookDeleteView
-# from books.admin import admin_site
+from books.admin import admin_site
 from users.views import BookListView
 
 urlpatterns = [
     # Users app
-    path('admin/', admin.site.urls, name='admin'),
+    path('admin/', admin_site.urls, name='admin'),
     path('register/', user_view.register, name='register'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
