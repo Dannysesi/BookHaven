@@ -14,8 +14,8 @@ class BookHavenAdminSite(AdminSite):
     site_header = 'BookHaven Administration'
     index_title = 'BookHaven Site Admin'
 
-# admin.site = BookHavenAdminSite(name='BookHaven')
+admin_site = BookHavenAdminSite(name='BookHaven')
 
-admin.site.register(Book, BookAdmin)
-admin.site.register(Chapter)
-admin.site.register(Review)
+admin_site.register(Book, BookAdmin)
+admin_site.register(Chapter)
+admin_site.register(Review)
