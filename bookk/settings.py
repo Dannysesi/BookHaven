@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +27,7 @@ SECRET_KEY = 'django-insecure-54qu9@ws6ju0!e*mux44o)_!9p%v=7!j@y1h91e#x8$q+h%t!#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['bookhaven-ccjr.onrender.com']
+ALLOWED_HOSTS = ['bookhaven-ccjr.onrender.com','127.0.0.1']
 
 
 # Application definition
@@ -83,6 +84,9 @@ DATABASES = {
     }
 }
 
+DATABASES['default'] = dj_database_url.parse("postgres://bookhaven_23cs_user:WSfd4dUV0u7MM3yl4CFL2XK7c2rkzFdw@dpg-cma3ppq1hbls73ci5qo0-a.oregon-postgres.render.com/bookhaven_23cs")
+
+# postgres://bookhaven_23cs_user:WSfd4dUV0u7MM3yl4CFL2XK7c2rkzFdw@dpg-cma3ppq1hbls73ci5qo0-a.oregon-postgres.render.com/bookhaven_23cs
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
