@@ -24,10 +24,6 @@ class Book(models.Model):
     image = models.ImageField(default='no_image.JPEG', upload_to='book_images', null=True, blank=True)
     pdf_file = models.FileField(upload_to='book_pdfs', null=True, blank=True)
 
-    def __init__(self, title, isbn):
-        self.title = title
-        self.isbn = isbn
-
     def __str__(self):
         return "{} ({})".format(self.title, self.isbn)
 
