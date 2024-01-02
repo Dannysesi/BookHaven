@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-54qu9@ws6ju0!e*mux44o)_!9p%v=7!j@y1h91e#x8$q+h%t!#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['bookhaven-ccjr.onrender.com']
 
 
 # Application definition
