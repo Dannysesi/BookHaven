@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 import dj_database_url
 #import boto3
+from google.oauth2 import service_account
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -143,3 +144,12 @@ EMAIL_PORT = 465
 EMAIL_USE_SSL = True
 EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
+
+DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+GS_BUCKET_NAME = 'your-gcs-bucket-name'
+GS_PROJECT_ID = 'your-gcp-project-id'
+GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+    'path/to/your/credentials.json'
+)
+
+MEDIA_URL = f'https://storage.googleapis.com/{GS_BUCKET_NAME}/'
