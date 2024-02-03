@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-54qu9@ws6ju0!e*mux44o)_!9p%v=7!j@y1h91e#x8$q+h%t!#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['bookhaven-ccjr.onrender.com','127.0.0.1']
 
@@ -127,6 +127,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
@@ -145,11 +146,4 @@ EMAIL_USE_SSL = True
 EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
 
-# DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
-# GS_BUCKET_NAME = 'your-gcs-bucket-name'
-# GS_PROJECT_ID = 'your-gcp-project-id'
-# GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
-#     'path/to/your/credentials.json'
-# )
 
-# MEDIA_URL = f'https://storage.googleapis.com/{GS_BUCKET_NAME}/'
