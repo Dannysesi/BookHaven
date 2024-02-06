@@ -26,12 +26,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-54qu9@ws6ju0!e*mux44o)_!9p%v=7!j@y1h91e#x8$q+h%t!#'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.environ.get("DEBUG") == "True"
 
-ALLOWED_HOSTS = ['bookhaven-ccjr.onrender.com','127.0.0.1']
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 
 
 # Application definition
@@ -89,7 +89,9 @@ DATABASES = {
     }
 }
 
-DATABASES['default'] = dj_database_url.parse("postgres://bookhaven_23cs_user:WSfd4dUV0u7MM3yl4CFL2XK7c2rkzFdw@dpg-cma3ppq1hbls73ci5qo0-a.oregon-postgres.render.com/bookhaven_23cs")
+database_url = os.environ.get('DATABASE_URL')
+
+DATABASES['default'] = dj_database_url.parse(database_url)
 
 # postgres://bookhaven_23cs_user:WSfd4dUV0u7MM3yl4CFL2XK7c2rkzFdw@dpg-cma3ppq1hbls73ci5qo0-a.oregon-postgres.render.com/bookhaven_23cs
 
