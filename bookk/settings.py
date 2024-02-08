@@ -14,6 +14,9 @@ from pathlib import Path
 import os
 import dj_database_url
 import cloudinary_storage
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 #import boto3
 # from google.oauth2 import service_account
 
@@ -147,6 +150,12 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': 'jB1aSW-JuZlbxiJtbNMot33D460'
 }
 
+cloudinary.config(
+    cloud_name='dsukcfaga',
+    api_key='282991162488711',
+    api_secret='jB1aSW-JuZlbxiJtbNMot33D460'
+)
+
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # Default primary key field type
@@ -164,4 +173,6 @@ EMAIL_USE_SSL = True
 EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
 
-
+#session management
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
+SESSION_COOKIE_HTTPONLY = True
